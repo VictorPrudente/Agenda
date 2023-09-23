@@ -57,7 +57,7 @@ public class Contact {
         sb.append("Name: " + name + "\n");
         sb.append("Phone Number: " + phoneNumber + "\n");
         sb.append("Birthday: " + sdf.format(birthDate) + "\n");
-
+        sb.append("\n");
         return sb.toString();
     }
 }

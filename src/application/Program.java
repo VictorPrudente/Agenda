@@ -2,14 +2,9 @@ package application;
 
 import entities.Contact;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -20,11 +15,10 @@ public class Program {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         boolean agenda = true;
         File contacts = new File("contacts.txt");
-
         while (agenda) {
             try {
+
                 System.out.println("Agenda Menu: ");
-                System.out.println("Options: ");
                 System.out.println("1. Show all contacts.");
                 System.out.println("2. Add new contact.");
                 System.out.println("3. Update a contact.");
@@ -33,13 +27,24 @@ public class Program {
                 System.out.print("Enter option: ");
                 int option = sc.nextInt();
                 sc.nextLine();
+
                 switch (option) {
                     case 1:
-                        System.out.println("All contacts");
-                        System.out.print("\033[H\033[2J");
-                        System.out.flush();
+                        try (BufferedReader br = new BufferedReader(new FileReader(contacts))) {
+                            System.out.println();
+                            String contact = br.readLine();
+                            while (contact != null) {
+                                System.out.println(contact);
+                                contact = br.readLine();
+                            }
+                        } catch (IOException e) {
+                            System.out.println("Reading error: " + e.getMessage());
+                            System.out.println();
+                        }
                         break;
+
                     case 2:
+                        System.out.println();
                         System.out.println("NEW CONTACT: ");
                         System.out.print("Name: ");
                         String name = sc.nextLine();
@@ -49,26 +54,36 @@ public class Program {
                         Date birthDay = sdf.parse(sc.next());
 
                         Contact contact = new Contact(name, phoneNumber, birthDay);
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(contacts))) {
+
+                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(contacts, true))) {
                             bw.write(contact.toString());
                             System.out.println("Contact '" + name + "' created sucessfully");
+                            System.out.println();
                         } catch (IOException e) {
                             System.out.println("Error writing file: " + e.getMessage());
                         }
                         break;
+
                     case 3:
+
                         System.out.println("Update a contact.");
                         break;
+
                     case 4:
+
                         System.out.println("Delete a contact.");
                         break;
                     case 5:
+
                         System.out.println("Exiting agenda.");
                         agenda = false;
                         break;
+
                     default:
+
                         System.out.println("Invalid option.");
                         break;
+
                 }
             } catch (RuntimeException e) {
                 System.out.println("Unextected error." + e.getMessage());
