@@ -1,23 +1,27 @@
 package entities;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Contact {
+
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String name;
     private Long phoneNumber;
     private Date birthDate;
-    private Date creationDate;
+
 
     public Contact(String name, Long phoneNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
     }
 
-    public Contact(String name, Long phoneNumber, Date birthDate, Date creationDate) {
+    public Contact(String name, Long phoneNumber, Date birthDate) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
-        this.creationDate = creationDate;
     }
 
     public String getName() {
@@ -44,11 +48,16 @@ public class Contact {
         this.birthDate = birthDate;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Name: " + name + "\n");
+        sb.append("Phone Number: " + phoneNumber + "\n");
+        sb.append("Birthday: " + sdf.format(birthDate) + "\n");
+
+        return sb.toString();
     }
 }
