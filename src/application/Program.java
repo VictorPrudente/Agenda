@@ -35,17 +35,10 @@ public class Program {
 
                 switch (option) {
                     case 1:
-                        try (BufferedReader br = new BufferedReader(new FileReader(contacts))) {
-                            System.out.println();
-                            String contact = br.readLine();
-                            while (contact != null) {
-                                System.out.println(contact);
-                                contact = br.readLine();
-                            }
-                        } catch (IOException e) {
-                            System.out.println("Reading error: " + e.getMessage());
-                            System.out.println();
-                        }
+                        System.out.println();
+                        System.out.println("Contacts: ");
+                        agenda.showContacts();
+                        System.out.println();
                         break;
 
                     case 2:
@@ -86,7 +79,7 @@ public class Program {
 
                 }
             } catch (RuntimeException e) {
-                System.out.println("Unextected error." + e.getMessage());
+                System.out.println("Unexpected error." + e.getMessage());
             } catch (ParseException e) {
                 System.out.println("Invalid format: " + e.getMessage());
             }

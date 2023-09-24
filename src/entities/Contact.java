@@ -1,8 +1,6 @@
 package entities;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Contact {
@@ -12,11 +10,6 @@ public class Contact {
     private Long phoneNumber;
     private Date birthDate;
 
-
-    public Contact(String name, Long phoneNumber) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-    }
 
     public Contact(String name, Long phoneNumber, Date birthDate) {
         this.name = name;
@@ -58,6 +51,6 @@ public class Contact {
         sb.append("Phone Number: " + phoneNumber + "\n");
         sb.append("Birthday: " + sdf.format(birthDate) + "\n");
         sb.append("\n");
-        return sb.toString();
+        return "Name: " + name + " | Phone Number: " + phoneNumber + " | Birthday: " + sdf.format(birthDate);
     }
 }
