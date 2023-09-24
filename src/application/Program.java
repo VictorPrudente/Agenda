@@ -1,8 +1,12 @@
 package application;
 
+import entities.Agenda;
 import entities.Contact;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,9 +17,10 @@ public class Program {
 
         Scanner sc = new Scanner(System.in);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        boolean agenda = true;
+        boolean execution = true;
         File contacts = new File("contacts.txt");
-        while (agenda) {
+        Agenda agenda = new Agenda();
+        while (execution) {
             try {
 
                 System.out.println("Agenda Menu: ");
@@ -54,14 +59,7 @@ public class Program {
                         Date birthDay = sdf.parse(sc.next());
 
                         Contact contact = new Contact(name, phoneNumber, birthDay);
-
-                        try (BufferedWriter bw = new BufferedWriter(new FileWriter(contacts, true))) {
-                            bw.write(contact.toString());
-                            System.out.println("Contact '" + name + "' created sucessfully");
-                            System.out.println();
-                        } catch (IOException e) {
-                            System.out.println("Error writing file: " + e.getMessage());
-                        }
+                        agenda.addContact(contact);
                         break;
 
                     case 3:
@@ -70,13 +68,15 @@ public class Program {
                         break;
 
                     case 4:
-
-                        System.out.println("Delete a contact.");
+                        System.out.println();
+                        System.out.println("Enter the name of the contact to delete it: ");
+                        String deletionName = sc.nextLine();
+                        agenda.deleteContact(deletionName);
                         break;
                     case 5:
 
                         System.out.println("Exiting agenda.");
-                        agenda = false;
+                        execution = false;
                         break;
 
                     default:

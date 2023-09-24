@@ -1,12 +1,4 @@
 Name: Prud
-Phone Number: 134
+Phone Number: 15134
 Birthday: 18/04/1994
-
-Name: Marilia
-Phone Number: 192392
-Birthday: 06/05/1999
-
-Name: Pedro
-Phone Number: 1344
-Birthday: 12/04/2023
 
