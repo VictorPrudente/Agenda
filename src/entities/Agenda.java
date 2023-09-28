@@ -14,17 +14,19 @@ public class Agenda {
 
 
     public void showContacts() {
-        if (contactsFile.length() > 0) {
-            try (BufferedReader br = new BufferedReader(new FileReader(contactsFile))) {
-                String line = br.readLine();
-                while (line != null) {
-                    System.out.println(line.toString());
-                    line = br.readLine();
+        boolean contactsList = false;
+        try (BufferedReader br = new BufferedReader(new FileReader(contactsFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (line.contains("Name")) {
+                    System.out.println(line);
+                    contactsList = true;
                 }
-            } catch (IOException e) {
-                System.out.println("Error reading file: " + e.getMessage());
             }
-        } else {
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+        if (!contactsList){
             System.out.println("Empty");
         }
     }
@@ -49,8 +51,8 @@ public class Agenda {
 
         try (BufferedReader br = new BufferedReader(new FileReader(contactsFile))) {
             while ((line = br.readLine()) != null) {
-                if(line.contains("Name: "+ contactName))
-                line = br.readLine();
+                if (line.contains("Name: " + contactName))
+                    line = br.readLine();
                 updatedLines.add(line);
             }
         } catch (IOException e) {

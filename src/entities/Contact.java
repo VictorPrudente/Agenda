@@ -45,12 +45,8 @@ public class Contact {
     @Override
     public String toString() {
 
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Name: " + name + "\n");
-        sb.append("Phone Number: " + phoneNumber + "\n");
-        sb.append("Birthday: " + sdf.format(birthDate) + "\n");
-        sb.append("\n");
-        return "Name: " + name + " | Phone Number: " + phoneNumber + " | Birthday: " + sdf.format(birthDate);
+        return "Name: " + name +
+                " | Phone Number: " + phoneNumber +
+                " | Birthday: " + sdf.format(birthDate);
     }
 }
