@@ -7,11 +7,11 @@ public class Contact {
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String name;
-    private Long phoneNumber;
+    private String phoneNumber;
     private Date birthDate;
 
 
-    public Contact(String name, Long phoneNumber, Date birthDate) {
+    public Contact(String name, String phoneNumber, Date birthDate) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
@@ -25,11 +25,11 @@ public class Contact {
         this.name = name;
     }
 
-    public Long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

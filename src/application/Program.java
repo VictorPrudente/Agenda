@@ -3,10 +3,7 @@ package application;
 import entities.Agenda;
 import entities.Contact;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,17 +44,35 @@ public class Program {
                         System.out.print("Name: ");
                         String name = sc.nextLine();
                         System.out.print("Phone number: ");
-                        long phoneNumber = sc.nextLong();
+                        String phoneNumber = sc.nextLine();
                         System.out.print("Birthday: ");
                         Date birthDay = sdf.parse(sc.next());
 
                         Contact contact = new Contact(name, phoneNumber, birthDay);
                         agenda.addContact(contact);
+                        System.out.println("Contact '" + contact.getName() + "' created sucessfully");
+
                         break;
 
                     case 3:
 
-                        System.out.println("Update a contact.");
+                        System.out.println("Update a contact: ");
+                        System.out.println("Find your contact by name or phone number.");
+                        System.out.println("1. Name");
+                        System.out.println("2. Number");
+                        System.out.print("Option: ");
+                        int answer = sc.nextInt();
+                        sc.nextLine();
+                        if (answer == 1) {
+                            System.out.println("Enter the name of your contact: ");
+                        } else if (answer == 2) {
+                            System.out.println("Enter the phone number of your contact: ");
+                        } else {
+                            System.out.println("Invalid input.");
+                        }
+                            String findContact = sc.nextLine();
+                            agenda.updateContact(findContact);
+
                         break;
 
                     case 4:
@@ -65,6 +80,7 @@ public class Program {
                         System.out.println("Enter the name of the contact to delete it: ");
                         String deletionName = sc.nextLine();
                         agenda.deleteContact(deletionName);
+                        System.out.println("Contact " + deletionName + " deleted successfully.");
                         break;
                     case 5:
 
